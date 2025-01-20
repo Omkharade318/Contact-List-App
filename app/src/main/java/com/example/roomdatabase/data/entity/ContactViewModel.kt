@@ -3,11 +3,15 @@ package com.example.roomdatabase.data.entity
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.roomdatabase.data.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ContactViewModel @Inject constructor(
     val repository: Repository
 ): ViewModel(){
@@ -22,7 +26,9 @@ class ContactViewModel @Inject constructor(
             phoneNumber = state.value.phoneNumber.value,
             email = state.value.email.value
         )
-        repository.insertContact(contact)
+        viewModelScope.launch{
+            repository.insertContact(contact)
+        }
     }
 
 }

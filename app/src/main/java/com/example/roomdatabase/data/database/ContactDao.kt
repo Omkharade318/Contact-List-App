@@ -12,7 +12,7 @@ import com.example.roomdatabase.data.entity.Contact
 interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertContact(contact: Contact)
+    suspend fun insertContact(contact: Contact)
 
     @Delete
     fun deleteContact(contact: Contact)

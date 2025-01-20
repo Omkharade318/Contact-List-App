@@ -6,7 +6,7 @@ import com.example.roomdatabase.data.entity.Contact
 class Repository(
     private val contactDao: ContactDao
 ) {
-    fun insertContact(contact: Contact) = contactDao.insertContact(contact)
+    suspend fun insertContact(contact: Contact) = contactDao.insertContact(contact)
 
     fun updateContact(contact: Contact) = contactDao.updateContact(contact)
 
