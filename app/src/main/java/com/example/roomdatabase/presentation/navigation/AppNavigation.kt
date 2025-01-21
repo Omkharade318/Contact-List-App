@@ -44,7 +44,8 @@ fun AppNavigation(
                 state = state.value,
                 onEvent = {
                     viewModel.insertContact()
-                }
+                },
+                navController = navController
             )
         }
     }

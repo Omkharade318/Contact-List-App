@@ -22,6 +22,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.roomdatabase.R
 import com.example.roomdatabase.data.entity.AppState
 
@@ -30,7 +32,8 @@ import com.example.roomdatabase.data.entity.AppState
 @Composable
 fun AddEditScreenUI(
     onEvent: () -> Unit = {},
-    state: AppState = AppState()
+    state: AppState = AppState(),
+    navController: NavHostController = rememberNavController()
 ) {
     Scaffold(
         topBar = {
@@ -103,6 +106,7 @@ fun AddEditScreenUI(
             Button(
                 onClick = {
                     onEvent.invoke()
+                    navController.navigateUp()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
