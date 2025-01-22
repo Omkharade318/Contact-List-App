@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.roomdatabase.data.entity.ContactViewModel
 import com.example.roomdatabase.presentation.screens.AddEditScreenUI
+import com.example.roomdatabase.presentation.screens.HomeScreenUI
 
 @Composable
 fun AppNavigation(
@@ -25,19 +26,12 @@ fun AppNavigation(
 
     NavHost(navController = navController, startDestination = Routes.HomeScreen){
         composable<Routes.HomeScreen>{
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {
-                        navController.navigate(Routes.AddEditScreen)
-                    }
-                ) {
-                    Text("Add Contact")
-                }
+            HomeScreenUI(
+                state = state.value,
+                viewModel = viewModel,
+                navController = navController
+            )
             }
-        }
 
         composable<Routes.AddEditScreen>{
             AddEditScreenUI(

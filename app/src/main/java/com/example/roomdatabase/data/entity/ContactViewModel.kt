@@ -29,6 +29,10 @@ class ContactViewModel @Inject constructor(
         viewModelScope.launch{
             repository.insertContact(contact)
         }
+
+        state.value.name.value = ""
+        state.value.phoneNumber.value = ""
+        state.value.email.value = ""
     }
 
 }
