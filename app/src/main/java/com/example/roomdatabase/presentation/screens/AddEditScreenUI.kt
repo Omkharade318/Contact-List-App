@@ -132,7 +132,10 @@ fun AddEditScreenUI(
                     .padding(vertical = 16.dp, horizontal = 62.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(red = 137, blue = 41, green = 91))
             ) {
-                Text("Save")
+                Text(
+                    text = "Save",
+                    color = Color.White
+                )
             }
         }
     }

@@ -50,11 +50,32 @@ class ContactViewModel @Inject constructor(
         state.value.name.value = ""
         state.value.phoneNumber.value = ""
         state.value.email.value = ""
+        state.value.id.value = 0
     }
 
+    fun deleteContact(){
+        val contact = Contact(
+            id = state.value.id.value,
+            name = state.value.name.value,
+            phoneNumber = state.value.phoneNumber.value,
+            email = state.value.email.value
+        )
+
+        viewModelScope.launch{
+            repository.deleteContact(contact)
+        }
+
+        state.value.name.value = ""
+        state.value.phoneNumber.value = ""
+        state.value.email.value = ""
+        state.value.id.value = 0
+
+
+    }
 }
 
 data class AppState(
+    var id: MutableState<Int> = mutableStateOf(0),
     var loading : Boolean = false,
     var allContacts: List<Contact> = emptyList<Contact>(),
     var error: String= "",

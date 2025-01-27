@@ -11,7 +11,7 @@ class Repository(
 
     fun updateContact(contact: Contact) = contactDao.updateContact(contact)
 
-    fun deleteContact(contact: Contact) = contactDao.deleteContact(contact)
+    suspend fun deleteContact(contact: Contact) = contactDao.deleteContact(contact)
 
     fun getAllContacts() = contactDao.getAllContacts().onEach { contacts -> }
 }

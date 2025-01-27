@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -28,6 +29,7 @@ import  androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.roomdatabase.data.entity.Contact
 import com.example.roomdatabase.presentation.navigation.Routes
@@ -59,7 +61,10 @@ fun HomeScreenUI(
                 .padding(12.dp)
         ) {
             items(state.allContacts.size){
-                ContactItemUI(contact = state.allContacts[it])
+                ContactItemUI(
+                    contact = state.allContacts[it],
+                    viewModel = viewModel
+                )
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
@@ -67,7 +72,10 @@ fun HomeScreenUI(
 }
 
 @Composable
-fun ContactItemUI(contact: Contact) {
+fun ContactItemUI(
+    contact: Contact,
+    viewModel: ContactViewModel
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -92,6 +100,21 @@ fun ContactItemUI(contact: Contact) {
                 Text(text = contact.phoneNumber, fontSize = 16.sp)
                 Text(text = contact.email, fontSize = 16.sp)
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Icon(
+                imageVector = Icons.Rounded.Delete,
+                contentDescription = null,
+                modifier = Modifier.clickable{
+                    viewModel.state.value.id.value = contact.id
+                    viewModel.state.value.name.value = contact.name
+                    viewModel.state.value.phoneNumber.value = contact.phoneNumber
+                    viewModel.state.value.email.value = contact.email
+                    viewModel.deleteContact()
+                }
+
+                )
         }
     }
 }
