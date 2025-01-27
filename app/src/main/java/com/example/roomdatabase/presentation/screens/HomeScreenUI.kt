@@ -1,5 +1,6 @@
 package com.example.roomdatabase.presentation.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +19,6 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,7 +26,6 @@ import com.example.roomdatabase.data.entity.AppState
 import com.example.roomdatabase.data.entity.ContactViewModel
 import  androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -43,6 +42,7 @@ fun HomeScreenUI(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
+                containerColor = Color(red = 137, blue = 41, green = 91),
                 onClick = {
                     navController.navigate(Routes.AddEditScreen)
                 }
@@ -54,6 +54,7 @@ fun HomeScreenUI(
         it
         LazyColumn(
             modifier = Modifier
+                .background(color =  Color(red = 242, blue = 212, green = 227))
                 .fillMaxSize()
                 .padding(12.dp)
         ) {
@@ -75,7 +76,7 @@ fun ContactItemUI(contact: Contact) {
             },
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFBBBBBB)
+            containerColor = Color(red = 200, green = 168, blue = 141)
         )
     ) {
         Row(
