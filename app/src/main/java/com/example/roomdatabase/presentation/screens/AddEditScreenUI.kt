@@ -74,6 +74,7 @@ fun AddEditScreenUI(
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = state.name.value,
                 onValueChange = {
                     state.name.value = it
@@ -85,12 +86,21 @@ fun AddEditScreenUI(
                     Text("Name")
                 },
                 shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = Color(red = 228, green = 180, blue = 114))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedTextColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedTextColor = Color(red = 209, green = 155, blue= 107),
+                    cursorColor = Color(red = 209, green = 155, blue= 107),
+                    unfocusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedBorderColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedBorderColor = Color(red = 137, blue = 41, green = 91)
+                )
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = state.phoneNumber.value,
                 onValueChange = {
                     state.phoneNumber.value = it
@@ -102,12 +112,21 @@ fun AddEditScreenUI(
                     Text("Phone Number")
                 },
                 shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = Color(red = 228, green = 180, blue = 114))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedTextColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedTextColor = Color(red = 209, green = 155, blue= 107),
+                    cursorColor = Color(red = 209, green = 155, blue= 107),
+                    unfocusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedBorderColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedBorderColor = Color(red = 137, blue = 41, green = 91)
+                )
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = state.email.value,
                 onValueChange = {
                     state.email.value = it
@@ -119,7 +138,15 @@ fun AddEditScreenUI(
                     Text("Email")
                 },
                 shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = Color(red = 228, green = 180, blue = 114))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedTextColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedTextColor = Color(red = 209, green = 155, blue= 107),
+                    cursorColor = Color(red = 209, green = 155, blue= 107),
+                    unfocusedLabelColor = Color(red = 228, green = 180, blue = 114),
+                    focusedBorderColor = Color(red = 137, blue = 41, green = 91),
+                    unfocusedBorderColor = Color(red = 137, blue = 41, green = 91)
+                )
             )
 
             Button(

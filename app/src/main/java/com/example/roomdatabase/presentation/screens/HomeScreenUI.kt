@@ -1,7 +1,9 @@
 package com.example.roomdatabase.presentation.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -63,7 +65,8 @@ fun HomeScreenUI(
             items(state.allContacts.size){
                 ContactItemUI(
                     contact = state.allContacts[it],
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    navController = navController
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
@@ -71,10 +74,12 @@ fun HomeScreenUI(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ContactItemUI(
     contact: Contact,
-    viewModel: ContactViewModel
+    viewModel: ContactViewModel,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
@@ -90,15 +95,40 @@ fun ContactItemUI(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .combinedClickable(
+                    onClick = {
+
+                    },
+                    onLongClick = {
+                        viewModel.state.value.id.value = contact.id
+                        viewModel.state.value.name.value = contact.name
+                        viewModel.state.value.phoneNumber.value = contact.phoneNumber
+                        viewModel.state.value.email.value = contact.email
+
+                        navController.navigate(Routes.AddEditScreen)
+                    }
+                )
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Text(text = contact.name, fontSize = 20.sp)
-                Text(text = contact.phoneNumber, fontSize = 16.sp)
-                Text(text = contact.email, fontSize = 16.sp)
+                Text(
+                    text = contact.name,
+                    fontSize = 20.sp,
+                    color = Color(red = 137, blue = 41, green = 91)
+                )
+                Text(
+                    text = contact.phoneNumber,
+                    fontSize = 16.sp,
+                    color = Color(red = 137, blue = 41, green = 91)
+                )
+                Text(
+                    text = contact.email,
+                    fontSize = 16.sp,
+                    color = Color(red = 137, blue = 41, green = 91)
+                )
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -112,9 +142,11 @@ fun ContactItemUI(
                     viewModel.state.value.phoneNumber.value = contact.phoneNumber
                     viewModel.state.value.email.value = contact.email
                     viewModel.deleteContact()
-                }
+                },
+                tint = Color(red = 137, blue = 41, green = 91)
+            )
 
-                )
+
         }
     }
 }

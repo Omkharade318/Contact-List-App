@@ -39,12 +39,13 @@ class ContactViewModel @Inject constructor(
 
     fun insertContact(){
         val contact = Contact(
+            id = state.value.id.value,
             name = state.value.name.value,
             phoneNumber = state.value.phoneNumber.value,
             email = state.value.email.value
         )
         viewModelScope.launch{
-            repository.insertContact(contact)
+            repository.upsertContact(contact)
         }
 
         state.value.name.value = ""
