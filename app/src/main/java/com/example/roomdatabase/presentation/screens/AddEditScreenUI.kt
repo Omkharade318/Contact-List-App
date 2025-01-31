@@ -74,7 +74,6 @@ fun AddEditScreenUI(
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
                 value = state.name.value,
                 onValueChange = {
                     state.name.value = it
@@ -100,7 +99,6 @@ fun AddEditScreenUI(
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
                 value = state.phoneNumber.value,
                 onValueChange = {
                     state.phoneNumber.value = it
@@ -126,7 +124,6 @@ fun AddEditScreenUI(
             Spacer(modifier = Modifier.height(12.dp))
 
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
                 value = state.email.value,
                 onValueChange = {
                     state.email.value = it

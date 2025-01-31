@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,19 +30,20 @@ import com.example.roomdatabase.data.entity.AppState
 import com.example.roomdatabase.data.entity.ContactViewModel
 import  androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.roomdatabase.data.entity.Contact
 import com.example.roomdatabase.presentation.navigation.Routes
 
-
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeScreenUI(
-    state: AppState ,
+    state: AppState = AppState(),
     viewModel: ContactViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController = rememberNavController()
 ){
     Scaffold(
         floatingActionButton = {
@@ -109,12 +111,12 @@ fun ContactItemUI(
                     }
                 )
                 .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
+            Column{
                 Text(
+
                     text = contact.name,
                     fontSize = 20.sp,
                     color = Color(red = 137, blue = 41, green = 91)
@@ -131,12 +133,11 @@ fun ContactItemUI(
                 )
             }
 
-            Spacer(modifier = Modifier.weight(1f))
-
             Icon(
                 imageVector = Icons.Rounded.Delete,
                 contentDescription = null,
-                modifier = Modifier.clickable{
+                modifier = Modifier
+                    .clickable{
                     viewModel.state.value.id.value = contact.id
                     viewModel.state.value.name.value = contact.name
                     viewModel.state.value.phoneNumber.value = contact.phoneNumber
