@@ -75,4 +75,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.5")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Coil for image loading
+    implementation(platform("io.coil-kt:coil-bom:2.4.0"))
+    implementation("io.coil-kt:coil-compose")
 }

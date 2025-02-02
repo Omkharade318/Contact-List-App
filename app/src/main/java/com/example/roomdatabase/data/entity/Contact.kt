@@ -9,5 +9,6 @@ data class Contact(
     var id: Int = 0,
     var name: String,
     var phoneNumber: String,
-    var email: String
+    var email: String,
+    var imageUri: String = ""
 )

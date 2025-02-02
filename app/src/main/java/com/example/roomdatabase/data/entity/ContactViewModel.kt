@@ -8,7 +8,6 @@ import com.example.roomdatabase.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -42,7 +41,8 @@ class ContactViewModel @Inject constructor(
             id = state.value.id.value,
             name = state.value.name.value,
             phoneNumber = state.value.phoneNumber.value,
-            email = state.value.email.value
+            email = state.value.email.value,
+            imageUri = state.value.imageUri.value
         )
         viewModelScope.launch{
             repository.upsertContact(contact)
@@ -52,6 +52,7 @@ class ContactViewModel @Inject constructor(
         state.value.phoneNumber.value = ""
         state.value.email.value = ""
         state.value.id.value = 0
+        state.value.imageUri.value = ""
     }
 
     fun deleteContact(){
@@ -70,8 +71,7 @@ class ContactViewModel @Inject constructor(
         state.value.phoneNumber.value = ""
         state.value.email.value = ""
         state.value.id.value = 0
-
-
+        state.value.imageUri.value = ""
     }
 }
 
@@ -83,5 +83,5 @@ data class AppState(
     var name: MutableState<String> = mutableStateOf(""),
     var phoneNumber: MutableState<String> = mutableStateOf(""),
     var email: MutableState<String> = mutableStateOf(""),
+    var imageUri: MutableState<String> = mutableStateOf("")
 )
-

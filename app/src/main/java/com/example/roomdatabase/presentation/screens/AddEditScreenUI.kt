@@ -1,7 +1,10 @@
 package com.example.roomdatabase.presentation.screens
 
-import androidx.compose.foundation.Image
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,12 +28,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.roomdatabase.R
 import com.example.roomdatabase.data.entity.AppState
 
@@ -42,6 +48,15 @@ fun AddEditScreenUI(
     state: AppState = AppState(),
     navController: NavHostController = rememberNavController()
 ) {
+    val context = LocalContext.current
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let {
+            state.imageUri.value = it.toString()
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -63,12 +78,19 @@ fun AddEditScreenUI(
                 .padding(it),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            Image(
-                painter = painterResource(R.drawable.default_profile_pic),
-                contentDescription = "Add Contact",
+            AsyncImage(
+                model = ImageRequest.Builder(context)
+                    .data(if (state.imageUri.value.isNotEmpty()) state.imageUri.value else R.drawable.default_profile_pic)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = "Contact Image",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(100.dp)
-                    .clip(shape = CircleShape)
+                    .clip(CircleShape)
+                    .clickable {
+                        imagePicker.launch("image/*")
+                    }
             )
 
             Spacer(modifier = Modifier.height(12.dp))

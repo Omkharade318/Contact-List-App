@@ -12,23 +12,23 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DiModule{
-
+object DiModule {
 
     @Singleton
     @Provides
-    fun provideDataBase(application: Application): ContactDatabase{
+    fun provideDataBase(application: Application): ContactDatabase {
         return Room.databaseBuilder(
             application,
             ContactDatabase::class.java,
             "contact_database.sql"
-        ).build()
+        )
+        .addMigrations(ContactDatabase.MIGRATION_1_2)
+        .build()
     }
 
     @Provides
     @Singleton
-    fun provideRepository(database: ContactDatabase): Repository{
+    fun provideRepository(database: ContactDatabase): Repository {
         return Repository(database.contactDao())
     }
-
 }
